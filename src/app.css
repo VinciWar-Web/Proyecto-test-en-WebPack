@@ -34,3 +34,7 @@ span{
     margin-bottom: 2rem;
     font-family: sans-serif;
 }
+
+.colorApi{
+    color: rgba(255, 255, 255, 0.61);
+}

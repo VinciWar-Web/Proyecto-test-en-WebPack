@@ -1,15 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import logo from './assets/images/logoPNG.png'
 
 const App = () => {
 
+  const [datos, setDatos] = useState([])
+
+  useEffect(() => {
+    API()
+  }, [])
+  
   const API = async () => {
     const resp = await fetch(process.env.REACT_API)
     const data = await resp.json()
-    console.log(data)
+
+    const color = data.game_indices.map( item => {
+      return{
+        colores: item.version
+      }
+    })
+    setDatos(color)
   }
 
-  API()
+
+  // console.log(datos.game_indices)
 
   return (
     <>
@@ -18,7 +31,15 @@ const App = () => {
         <img className="girar" src={logo} alt='' />
         <h1>Bienvenido a React 18</h1>
         <span>Empecemos !!!</span>
-        <span>{process.env.REACT_API}</span>
+        {/* <span>{process.env.REACT_API}</span> */}
+
+        {
+          datos.map( (item, index) => (
+              <div key={index} className='colorApi'>
+                <p >{item.colores.name}</p>
+              </div>
+          ))
+        }
       </div>
     </>
   )

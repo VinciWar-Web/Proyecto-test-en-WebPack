@@ -2,9 +2,6 @@ const path=require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin')
-
 
 module.exports={
     entry:'./src/index.js',
@@ -12,9 +9,10 @@ module.exports={
         path:path.resolve(__dirname,'dist'),
         filename:'[name].[contenthash].js',
         publicPath:'/',
-        assetModuleFilename: 'assets/images/[hash][ext][query]',
-        clean: true
+        assetModuleFilename: 'assets/images/[hash][ext][query]'
     },
+    mode: 'development',
+    watch: true,
     resolve:{
         extensions:['.js','.jsx']
     },
@@ -57,13 +55,6 @@ module.exports={
         }),
         new Dotenv()
     ],
-    optimization: {
-        minimize: true,
-        minimizer: [
-            new CssMinimizerPlugin(),
-            new TerserPlugin(),
-        ]
-    },
     devServer:{
         static:path.join(__dirname,'dist'),
         compress:true,
