@@ -22,7 +22,7 @@ const App = () => {
   }
 
 
-  // console.log(datos.game_indices)
+  console.log(datos)
 
   return (
     <>
